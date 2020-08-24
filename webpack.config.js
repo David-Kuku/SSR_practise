@@ -1,12 +1,12 @@
 const path = require("path");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const autoprefixer = require("autoprefixer");
 
 module.exports = {
   mode: "development",
   node: {
     fs: "empty",
-    net: 'empty',
+    net: "empty",
   },
   entry: {
     client: "./src/browser",
@@ -29,15 +29,6 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/,
-
-        use: [
-          {
-            loader: "css-loader/locals",
-          },
-        ],
-      },
-      {
         test: /js$/,
         exclude: /(node_modules)/,
         loader: "babel-loader",
@@ -53,18 +44,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: "css-loader",
-              options: { importLoaders: 1 },
-            },
-            {
-              loader: "postcss-loader",
-              options: { plugins: [autoprefixer()] },
-            },
-          ],
-        }),
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /js$/,
@@ -74,4 +54,5 @@ module.exports = {
       },
     ],
   },
+  plugins: [new MiniCssExtractPlugin()],
 };

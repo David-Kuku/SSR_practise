@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, StaticRouter, Switch, Route, Link } from "react-router-dom";
 import { createMemoryHistory } from 'history';
 
-// import './App.css';
+import './App.css';
 import Navigation from "./components/Navigation";
 import Content from "./components/content";
 import Footer from "./components/footer";
@@ -15,6 +15,10 @@ class App extends Component {
     return (
       <div className="App">
         <StaticRouter
+          history={history}
+          basename={
+            typeof window !== "undefined" ? window.location.pathname : ""
+          }
         >
           <Switch>
             <Route path="/" exact component={Home} />
