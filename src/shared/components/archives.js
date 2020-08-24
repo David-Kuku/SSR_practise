@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import 'tachyons'
+// import 'tachyons'
 import Navigation from './Navigation'
 
 const Archives =()=>{

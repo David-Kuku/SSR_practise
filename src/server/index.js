@@ -1,29 +1,14 @@
-import React from 'react';
-import express from 'express';
-import { renderToString } from 'react-dom/server';
+import React from "react";
+import { renderToString } from "react-dom/server";
 
-import App from '../shared/App';
+import App from "../shared/App";
 
-const app = express();
+module.exports = function render(initialState) {
+  // render the App store static markup ins content variable
+  let content = renderToString(<App />);
 
-app.use(express.static('public'));
+  // Get a copy of store data to create the same store on client side
+  const preloadedState = {};
 
-app.get("*", (req,res) =>{
-  res.send(`
-  <!DOCTYPE html>
-  <head>
-  <title>Universal react</title>
-  <link rel = "stylesheet" href="/css/main.css">
-  <script src ="/bundle.js" defer></script>
-  </head>
-
-  <body>
-  <div id ="root">${renderToString(<App />)}</div>
-  </body>
-  </html>
-  `)
-})
-  
-app.listen( process.env.PORT || 3000, () => {
-    console.log(`Server is listening`);
-});
+  return { content, preloadedState };
+};
