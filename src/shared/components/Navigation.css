@@ -1,0 +1,23 @@
+.Nav{
+    display:flex;
+    
+    background-color: darkgray;
+}
+.block p{
+    display: inline-block;
+    margin-right: 15px;
+}
+.flex-child{
+    font-style: normal;
+}
+
+@media only screen and (max-width: 767px){
+    .block p{
+        display: none;
+    }
+}
+@media only screen and (min-width: 767px){
+    .upp1{
+        display: none;
+    }
+}
